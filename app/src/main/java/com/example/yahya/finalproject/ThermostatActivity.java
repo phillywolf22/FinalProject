@@ -25,6 +25,10 @@ import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * created by Philip Tharakan
+ */
+
 
 public class ThermostatActivity extends Activity {
 
@@ -40,13 +44,12 @@ public class ThermostatActivity extends Activity {
         setContentView(R.layout.activity_thermostat);
 
          lv = (ListView)findViewById(R.id.list_results);
-        //lv.setAdapter(new ArrayAdapter<String>(this, R.layout.cell_layout, sourceData));
 
-       // button = (Button) findViewById(R.id.buttonTest);
-
+        //buttons
         saveButton = (Button) findViewById(R.id.insert_button);
         viewData = (Button) findViewById(R.id.saveNew);
 
+        //EditTexts
         dateText = (EditText) findViewById(R.id.dateText);
         timeText = (EditText) findViewById(R.id.timeText);
         tempText = (EditText) findViewById(R.id.tempText);

@@ -16,6 +16,14 @@ import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * created by Philip Tharakan
+ */
+
+
+//this class didn't end up getting used
+    // used viewlist contents instead so that I could display multiple columns.
+
 public class ListDataActivity extends Activity {
 
     DatabaseHelperPhil mDatabaseHelper;

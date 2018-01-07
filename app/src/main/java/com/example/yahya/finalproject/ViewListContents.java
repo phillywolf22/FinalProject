@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by root on 04/01/18.
+ * created by Philip Tharakan
  */
+
 
 public class ViewListContents extends Activity{
 
@@ -25,6 +26,11 @@ public class ViewListContents extends Activity{
     ArrayList<Save> userList;
     ListView listView;
     Save user;
+
+
+    //REFERENCE for how to display multiple columns from a database into a ListView
+    //https://www.youtube.com/watch?v=hHQqFGpod14
+    //https://www.youtube.com/watch?v=jpt3Md9aDIQ
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
