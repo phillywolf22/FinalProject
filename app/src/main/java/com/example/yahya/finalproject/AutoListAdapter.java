@@ -14,15 +14,19 @@ import java.util.ArrayList;
  * Created by Jason on 04/01/2018.
  */
 
+/* Reference for ListAdapter Class:
+    https://www.youtube.com/watch?v=8K-6gdTlGEA
+ */
 public class AutoListAdapter extends ArrayAdapter<Automobile> {
 
     private LayoutInflater mInflater;
-    private ArrayList<Automobile> cars;
+    private ArrayList<Automobile> Automobiles;
     private int mViewResourceId;
 
-    public AutoListAdapter(Context context, int textViewResourceId, ArrayList<Automobile> cars) {
-        super(context, textViewResourceId, cars);
-        this.cars = cars;
+    // Constructor
+    public AutoListAdapter(Context context, int textViewResourceId, ArrayList<Automobile> Automobiles) {
+        super(context, textViewResourceId, Automobiles);
+        this.Automobiles = Automobiles;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mViewResourceId = textViewResourceId;
     }
@@ -30,24 +34,23 @@ public class AutoListAdapter extends ArrayAdapter<Automobile> {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(mViewResourceId, null);
 
-        Automobile car = cars.get(position);
+        Automobile auto = Automobiles.get(position);
 
         // When working with values, convert to string and check if length > 0
-        if (car != null) {
+        if (auto != null) {
             TextView price = convertView.findViewById(R.id.textPrice);
             TextView litres = convertView.findViewById(R.id.textLitres);
             TextView kilometers = convertView.findViewById(R.id.textKilometers);
             if (price != null) {
-                price.setText(car.getPrice());
+                price.setText(auto.getPrice());
             }
             if (litres != null) {
-                litres.setText((car.getLitres()));
+                litres.setText((auto.getLitres()));
             }
             if (kilometers != null) {
-                kilometers.setText((car.getKilometers()));
+                kilometers.setText((auto.getKilometers()));
             }
         }
-
         return convertView;
     }
 }
