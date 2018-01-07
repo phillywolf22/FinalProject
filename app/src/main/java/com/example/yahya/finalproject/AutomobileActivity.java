@@ -2,29 +2,19 @@ package com.example.yahya.finalproject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class AutomobileActivity extends Activity {
 
-   /* String [] sourceData = { "  ","Activity Tracking", "  ", "Food Nutrition information tracker",
-            "House Thermostat", "Automobile"}; */
-
     AutoDatabaseHelper dbObject;
-    ArrayList<String> gasEntries = new ArrayList();
 
     EditText    etPrice, etLitres, etKilometers , etID;
     TextView    tvPrice, tvLitres, tvKilometers, tvEntry;
@@ -37,7 +27,7 @@ public class AutomobileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_automobile);
         dbObject = new AutoDatabaseHelper(this);
-        Log.i(LOG_TAG, "onCreate: db created ");
+        Log.i(LOG_TAG, "in onCreate() DB created ");
 
         etPrice = findViewById(R.id.price_field);
         etLitres = findViewById(R.id.litres_field);
@@ -66,6 +56,7 @@ public class AutomobileActivity extends Activity {
         btnViewList.setText(R.string.view_list_button);
         // End of localization
 
+        // Launch new intent - AutoViewListContents
         btnViewList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,10 +65,9 @@ public class AutomobileActivity extends Activity {
             }
         });
 
-
-        //Creating an array adapter for the listView
-        //ListView lv = (ListView)findViewById(R.id.gas_list);
-        //lv.setAdapter(new ArrayAdapter<String>(this, R.layout.cell_layout, sourceData));
+        /* Reference for methods:
+        http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
+         */
         addGasData();
         deleteGasData();
         viewData();
@@ -85,6 +75,10 @@ public class AutomobileActivity extends Activity {
     }
 
     public void addGasData() {
+
+        // Insert new row into the table
+        // Check if the row is inserted and execute toast message
+        Log.i(LOG_TAG, "In addGasData()");
         btnAddGasData.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -94,7 +88,7 @@ public class AutomobileActivity extends Activity {
                                 etLitres.getText().toString(),
                                 etKilometers.getText().toString()
                         );
-                        if(isInserted == true)
+                        if(isInserted)
                             Toast.makeText(AutomobileActivity.this,
                                     "Data was added successfully.",
                                     Toast.LENGTH_LONG).show();
@@ -105,9 +99,12 @@ public class AutomobileActivity extends Activity {
                     }
                 }
         );
-    } /* End of Method */
+    }
 
     public void deleteGasData() {
+        // Delete specified row into the table
+        // Check if the row is deleted and execute toast message
+        Log.i(LOG_TAG, "in deleteGasData()");
         btnDeleteGasData.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -124,9 +121,11 @@ public class AutomobileActivity extends Activity {
                     }
                 }
         );
-    } /* End of Method */
+    }
 
     public void updateGasData() {
+        // Insert new row into the table
+        // Check if the row is inserted and execute toast message
         Log.i(LOG_TAG, "In updateGasData()");
         btnUpdateData.setOnClickListener(
                 new View.OnClickListener() {
@@ -137,7 +136,7 @@ public class AutomobileActivity extends Activity {
                                 etPrice.getText().toString(),
                                 etLitres.getText().toString(),
                                 etKilometers.getText().toString());
-                        if(isUpdate == true)
+                        if(isUpdate)
                             Toast.makeText(AutomobileActivity.this,
                                     "Data updated successfully.", Toast.LENGTH_LONG).show();
                         else
@@ -156,11 +155,9 @@ public class AutomobileActivity extends Activity {
                     public void onClick(View v) {
                         Cursor c = dbObject.getGasData();
                         if(c.getCount() == 0) {
-                            // show message
                             showMessage("Error","Nothing found");
                             return;
                         }
-
                         StringBuffer buffer = new StringBuffer();
                         while (c.moveToNext()) {
                             buffer.append("Id: " + c.getString(0)+"\n");
@@ -169,47 +166,20 @@ public class AutomobileActivity extends Activity {
                             buffer.append("Kilometers: "+ c.getString(3)+"\n");
                             buffer.append("Date: " + c.getString(4)+"\n\n");
                         }
-                        // Show all data
-                        showMessage("Data",buffer.toString());
+                        // Show all data in alert dialog box
+                        showMessage("Gas Data",buffer.toString());
                     }
                 }
         );
-    } /* End of Method */
+    }
 
+    // Launch alert dialog box with specified param
     public void showMessage(String title,String Message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
-    } /* End of Method */
-
-
-
-    public class ChatAdapter extends ArrayAdapter<String> {
-
-        public ChatAdapter(Context ctx) {
-            super(ctx, 0);
-        }
-
-        public int getCount() {
-            return gasEntries.size();
-        }
-
-        public String getItem(int position) {
-            return gasEntries.get(position);
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = AutomobileActivity.this.getLayoutInflater();
-            View result = null;
-
-            result = inflater.inflate(R.layout.gas_entry_list, null);
-
-            TextView text = result.findViewById(R.id.id_text);
-            text.setText(getItem(position)); // get the string at position
-            return result;
-        }
     }
 
 } /* End of Class AutomobileActivity */

@@ -27,10 +27,7 @@ public class AutoViewListContents extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auto_listview);
 
-
-
         myDB = new AutoDatabaseHelper(this);
-
         carList = new ArrayList<>();
         Cursor data = myDB.getGasData();
         int numRows = data.getCount();
@@ -49,7 +46,7 @@ public class AutoViewListContents extends Activity{
                 i++;
             }
             AutoListAdapter adapter =  new AutoListAdapter(this,R.layout.auto_list_adapter_view, carList);
-            listView = (ListView) findViewById(R.id.listView);
+            listView = findViewById(R.id.listView);
             listView.setAdapter(adapter);
         }
 

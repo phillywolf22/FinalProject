@@ -23,7 +23,7 @@ public class AutoDatabaseHelper extends SQLiteOpenHelper{
     public static final int VERSION_NUMBER = 2;
     public static final String TABLE_NAME = "Gas_Info";
 
-    public static final String COL_ID = "Gas_ID";;
+    public static final String COL_ID = "Gas_ID";
     public static final String COL_PRICE = "Price";
     public static final String COL_LITRES = "Litres";
     public static final String COL_KILOMETERS = "Kilometers";
@@ -34,7 +34,7 @@ public class AutoDatabaseHelper extends SQLiteOpenHelper{
             + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_PRICE + " TEXT, "
             + COL_LITRES + " TEXT, "
-            + COL_KILOMETERS + " TEXT, " // Make sure to put a comma back TEXT,
+            + COL_KILOMETERS + " TEXT, "
             + COL_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP "
             + " );";
 
@@ -56,7 +56,6 @@ public class AutoDatabaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         String whereClause = "Gas_ID=?";
-
         contentValues.put(COL_ID, id);
         contentValues.put(COL_PRICE, price);
         contentValues.put(COL_LITRES, litres);
