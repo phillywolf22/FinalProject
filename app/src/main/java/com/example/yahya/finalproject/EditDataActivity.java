@@ -9,6 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * created by Philip Tharakan
+ */
+
+
+// this activity is to have a screen for the user to delete rows from listview.
+
+    //Reference
+        //https://www.youtube.com/watch?annotation_id=annotation_3065812653&feature=iv&src_vid=SK98ayjhk1E&v=aQAIMY-HzL8
+
+
 public class EditDataActivity extends Activity {
 
     private static final String TAG = "EditDataActivity";
@@ -42,7 +53,7 @@ public class EditDataActivity extends Activity {
         //
         selectedDate = receivedIntent.getStringExtra("date");
 
-        //editable_item.setText(selectedDate);
+
 
         btnSave.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -57,6 +68,9 @@ public class EditDataActivity extends Activity {
             }
         });
 
+        //Here the USER can input the id of the column that they want to delete and it will be
+        //removed from the listview.
+
             btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,13 +84,7 @@ public class EditDataActivity extends Activity {
             }
         });
 
-//        btnList.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent editScreenIntent = new Intent(EditDataActivity.this, ListDataActivity.class);
-//                startActivity(editScreenIntent);
-//            }
-//        });
+
 
         btnEntryScreen.setOnClickListener(new View.OnClickListener() {
             @Override
